@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=<Ubuntu-Bluetooth-Menu>
+Comment=Autostart executable for ubuntu bluetooth menu
+StartupNotify=false
+X-GNOME-Autostart-enabled=true
+Terminal=false
+Hidden=false
+
+Exec=python3 /home/thomas/Documents/Github/ubuntu-bluetooth-menu/main.py
