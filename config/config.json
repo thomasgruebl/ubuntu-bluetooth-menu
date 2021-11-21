@@ -1,0 +1,5 @@
+{
+    "default": "3C:4D:BE:1B:38:E4",
+    "secondary": "12:23:23:23:23",
+    "fetch_interval": 10
+}
