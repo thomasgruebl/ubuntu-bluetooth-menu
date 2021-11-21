@@ -7,5 +7,3 @@ StartupNotify=false
 X-GNOME-Autostart-enabled=true
 Terminal=false
 Hidden=false
-
-Exec=python3 /home/thomas/Documents/Github/ubuntu-bluetooth-menu/main.py
