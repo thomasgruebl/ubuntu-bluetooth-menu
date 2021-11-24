@@ -1,5 +1,5 @@
-PyGObject>=3.42.0
 pycairo>=1.20.1
+PyGObject>=3.42.0
 vext>=0.7.6
 vext.gi>=0.7.4
 PyGObject-stubs>=0.0.2
