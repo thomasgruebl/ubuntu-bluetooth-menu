@@ -24,6 +24,11 @@
 
 
 ## Dependencies
+Install by running:
+```console
+$ sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 gir1.2-appindicator3-0.1
+```
+
 As outlined in the requirements.txt file:
 - PyGObject>=3.42.0
 - pycairo>=1.20.1
@@ -39,7 +44,7 @@ As outlined in the requirements.txt file:
 $ git clone https://github.com/thomasgruebl/ubuntu-bluetooth-menu.git
 
 # navigate into the repo
-$ cd ubuntu-bluetooth-menu 
+$ cd ubuntu-bluetooth-menu
 
 # install requirements
 $ pip3 install -r requirements.txt
