@@ -22,6 +22,7 @@
 - Provides the option to set a default and a secondary device
 - Fetches new devices automatically when they appear (leaves the option to manually specify the --fetch-interval)
 
+**Note:** If you find that the bluetooth menu icon is frozen for some reason, it might be caused by a frozen Gnome desktop session.
 
 ## Dependencies
 Install by running:
