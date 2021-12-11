@@ -106,6 +106,45 @@ def configure_autostart(exec_command: str, working_dir: str):
             f.write(exec_command)
 
 
+def disable_enable_system_sleep(disable_autostart: bool, working_dir: str):
+    """
+    Disables or enables system sleep (based on whether the autostart flag is enabled/disabled)
+
+    :param disable_autostart: True if autostart flag is set, else False.
+    :type disable_autostart: bool
+    :param working_dir: the absolute path of the file which is under execution (main.py).
+    :type working_dir: str
+    """
+    copy_into_system_sleep = working_dir + '/config/configure_system_sleep.sh'
+    remove_from_system_sleep = working_dir + '/config/remove_from_system_sleep.sh'
+
+    if disable_autostart:
+        subprocess.call(['sh', copy_into_system_sleep])
+    else:
+        subprocess.call(['sh', remove_from_system_sleep])
+
+
+def configure_system_sleep(main_path: str, working_dir: str):
+    """
+    Configures sleep script which will be placed into "/lib/systemd/system-sleep/ubuntu-menu-bluetooth-sleep.sh"
+
+    :param main_path: the path of the ubuntu-bluetooth-menu main.py
+    :type main_path: str
+    :param working_dir: the absolute path of the file which is under execution (main.py).
+    :type working_dir: str
+    """
+    sleep_file_path = working_dir + '/config/ubuntu-bluetooth-menu-sleep.sh'
+    if not os.path.exists(sleep_file_path):
+        logger.error("\nPlease add the ubuntu-bluetooth-menu-sleep.sh to the config directory.\n")
+        raise FileNotFoundError('config/ubuntu-bluetooth-menu-sleep.sh')
+
+    with open(sleep_file_path, 'r') as f:
+        replaced_text = f.read().replace('<AUTO_REPLACEMENT_WITH_MAIN_PATH>', main_path)
+
+    with open(sleep_file_path, 'w') as f:
+        f.write(replaced_text)
+
+
 def main():
     parser = argparse.ArgumentParser(usage="%(prog)s [options]")
 
@@ -156,6 +195,9 @@ def main():
     configure_autostart(exec_command, working_dir)
     disable_enable_autostart(disable_autostart, working_dir)
 
+    # configure system sleep / wakeup
+    configure_system_sleep(main_path, working_dir)
+
     # set default and/or secondary device and store in json
     if config:
         if hasattr(args, 'fetch_interval'):
@@ -163,6 +205,8 @@ def main():
 
         if hasattr(args, 'default') or hasattr(args, 'secondary'):
             configure_default_devices(config_path, default, secondary)
+
+        disable_enable_system_sleep(disable_autostart, working_dir)
 
         sys.exit()
 
